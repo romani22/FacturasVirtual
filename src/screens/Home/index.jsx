@@ -7,7 +7,6 @@ const Home = () => {
 	const [seeView, setSeeView] = useState();
 
 	const handleView = (viewSelect) => {
-		console.log(viewSelect);
 		setSeeView(viewSelect);
 	};
 

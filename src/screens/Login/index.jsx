@@ -7,13 +7,13 @@ import Logo from '../../components/Logo';
 import { useFonts } from 'expo-font';
 import Button from '../../components/Button';
 import colors from '../../constants/colors';
-const Login = ({ sessionConfirm }) => {
+// const Login = ({ sessionConfirm }) => {
+const Login = ({ navigation }) => {
 	const [loaded] = useFonts({
 		'Sigmar-Regular': require('../../assets/fonts/Sigmar-Regular.ttf'),
 	});
 	const [user, setUser] = useState('');
 	const [password, setPassword] = useState('');
-	const [confirm, setConfirm] = useState(false);
 
 	const handleUser = (user) => {
 		setUser(user);
@@ -23,14 +23,15 @@ const Login = ({ sessionConfirm }) => {
 	};
 	const handleCheckLogin = () => {
 		if (user == 'prueba' && password == '1234') {
-			setConfirm(true);
+			navigation.navigate('Home', {
+				user: user,
+			});
+			setUser('');
+			setPassword('');
 		} else {
-			setConfirm(false);
+			null;
 		}
 	};
-	useEffect(() => {
-		sessionConfirm(confirm);
-	}, [confirm]);
 
 	if (!loaded) {
 		return null;
@@ -40,15 +41,7 @@ const Login = ({ sessionConfirm }) => {
 			<Card>
 				<Logo />
 				<Text style={styles.titleLogin}>INICIAR SESIÓN</Text>
-				<Input
-					blurOnSubmit
-					autoCapitalize="none"
-					autoCorrect={false}
-					keyboardType="email-address"
-					placeholder="escribe prueba"
-					value={user}
-					onChangeText={handleUser}
-				/>
+				<Input blurOnSubmit autoCapitalize="none" autoCorrect={false} keyboardType="email-address" placeholder="escribe prueba" value={user} onChangeText={handleUser} />
 				<Input
 					blurOnSubmit
 					autoCapitalize="none"
@@ -59,12 +52,7 @@ const Login = ({ sessionConfirm }) => {
 					value={password}
 					onChangeText={handlePassword}
 				/>
-				<Button
-					title={'Ingresar'}
-					buttonStyle={styles.buttonLogin}
-					textStyle={{ color: colors.white }}
-					actionPress={() => handleCheckLogin()}
-				/>
+				<Button title={'Ingresar'} buttonStyle={styles.buttonLogin} textStyle={{ color: colors.white }} actionPress={() => handleCheckLogin()} />
 			</Card>
 		</View>
 	);

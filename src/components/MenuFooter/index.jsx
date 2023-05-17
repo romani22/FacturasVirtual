@@ -9,7 +9,6 @@ import colors from '../../constants/colors';
 const MenuFooter = ({ clickView }) => {
 	const [viewSelect, setViewSelect] = useState('');
 	const HandleclickMenu = (viewActive) => {
-		console.log(viewActive);
 		setViewSelect(viewActive);
 	};
 	useEffect(() => {

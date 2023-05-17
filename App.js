@@ -3,19 +3,21 @@ import Login from './src/screens/Login';
 import colors from './src/constants/colors';
 import Home from './src/screens/Home';
 import { useState } from 'react';
+import AppNavigation from './src/navigation/AppNavigation';
 
 export default function App() {
-	const [login, setLogin] = useState(false);
-	const confirmLogin = (confirm) => {
-		setLogin(confirm);
-	};
+	// const [login, setLogin] = useState(false);
+	// const confirmLogin = (confirm) => {
+	// 	setLogin(confirm);
+	// };
 
-	let content = <Login sessionConfirm={confirmLogin} />;
-	if (login) {
-		content = <Home />;
-	}
+	// let content = <Login sessionConfirm={confirmLogin} />;
+	// if (login) {
+	// 	content = <Home />;
+	// }
 
-	return <View style={styles.container}>{content}</View>;
+	// return <View style={styles.container}>{content}</View>;
+	return <AppNavigation />;
 }
 
 const styles = StyleSheet.create({
