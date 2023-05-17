@@ -1,4 +1,4 @@
-import { View, Text, Image, FlatList } from 'react-native';
+import { View, Text } from 'react-native';
 import Button from '../Button';
 import styles from './styles';
 

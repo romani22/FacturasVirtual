@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './styles';
 import Card from '../../components/Card';
 import Input from '../../components/Input';
@@ -7,7 +7,6 @@ import Logo from '../../components/Logo';
 import { useFonts } from 'expo-font';
 import Button from '../../components/Button';
 import colors from '../../constants/colors';
-// const Login = ({ sessionConfirm }) => {
 const Login = ({ navigation }) => {
 	const [loaded] = useFonts({
 		'Sigmar-Regular': require('../../assets/fonts/Sigmar-Regular.ttf'),
