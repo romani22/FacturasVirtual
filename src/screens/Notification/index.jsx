@@ -1,10 +1,12 @@
 import { View, Text } from 'react-native';
-import React from 'react';
+import styles from './styles';
 
 const Notification = () => {
 	return (
-		<View>
-			<Text>Notification</Text>
+		<View style={styles.container}>
+			<View style={styles.view}>
+				<Text>Notification</Text>
+			</View>
 		</View>
 	);
 };

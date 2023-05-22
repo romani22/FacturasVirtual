@@ -1,10 +1,12 @@
 import { View, Text } from 'react-native';
-import React from 'react';
+import styles from './styles';
 
 const Turn = () => {
 	return (
-		<View>
-			<Text>Turn</Text>
+		<View style={styles.container}>
+			<View style={styles.view}>
+				<Text>Turn</Text>
+			</View>
 		</View>
 	);
 };

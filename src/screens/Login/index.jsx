@@ -22,7 +22,7 @@ const Login = ({ navigation }) => {
 	};
 	const handleCheckLogin = () => {
 		if (user == 'prueba' && password == '1234') {
-			navigation.navigate('Home', {
+			navigation.navigate('BottomTabsNavigator', {
 				user: user,
 			});
 			setUser('');
