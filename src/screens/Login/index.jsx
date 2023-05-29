@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './styles';
 import Card from '../../components/Card';
 import Input from '../../components/Input';
@@ -7,7 +7,15 @@ import Logo from '../../components/Logo';
 import { useFonts } from 'expo-font';
 import Button from '../../components/Button';
 import colors from '../../constants/colors';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { LoginUser } from '../../store/actions/user.action';
+
 const Login = ({ navigation }) => {
+	const logeo = useSelector((state) => state.user.selected);
+
+	const dispatch = useDispatch();
+
 	const [loaded] = useFonts({
 		'Sigmar-Regular': require('../../assets/fonts/Sigmar-Regular.ttf'),
 	});
@@ -20,11 +28,14 @@ const Login = ({ navigation }) => {
 	const handlePassword = (pass) => {
 		setPassword(pass);
 	};
+
+	useEffect(() => {
+		dispatch(LoginUser(user, password));
+	}, [user, password]);
+
 	const handleCheckLogin = () => {
-		if (user == 'prueba' && password == '1234') {
-			navigation.navigate('BottomTabsNavigator', {
-				user: user,
-			});
+		if (logeo) {
+			navigation.navigate('BottomTabsNavigator');
 			setUser('');
 			setPassword('');
 		} else {
@@ -40,7 +51,15 @@ const Login = ({ navigation }) => {
 			<Card>
 				<Logo />
 				<Text style={styles.titleLogin}>INICIAR SESIÓN</Text>
-				<Input blurOnSubmit autoCapitalize="none" autoCorrect={false} keyboardType="email-address" placeholder="escribe prueba" value={user} onChangeText={handleUser} />
+				<Input
+					blurOnSubmit
+					autoCapitalize="none"
+					autoCorrect={false}
+					keyboardType="email-address"
+					placeholder="escribe prueba"
+					value={user}
+					onChangeText={handleUser}
+				/>
 				<Input
 					blurOnSubmit
 					autoCapitalize="none"
@@ -51,7 +70,12 @@ const Login = ({ navigation }) => {
 					value={password}
 					onChangeText={handlePassword}
 				/>
-				<Button title={'Ingresar'} buttonStyle={styles.buttonLogin} textStyle={{ color: colors.white }} actionPress={() => handleCheckLogin()} />
+				<Button
+					title={'Ingresar'}
+					buttonStyle={styles.buttonLogin}
+					textStyle={{ color: colors.white }}
+					actionPress={() => handleCheckLogin()}
+				/>
 			</Card>
 		</View>
 	);

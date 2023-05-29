@@ -24,7 +24,6 @@ const AppNavigation = () => {
 				name="Login"
 				component={Login}
 				options={{
-					title: 'Login',
 					headerShown: false,
 				}}
 			/>
@@ -32,7 +31,6 @@ const AppNavigation = () => {
 				name="BottomTabsNavigator"
 				component={BottomTabsNavigator}
 				options={{
-					title: 'BottomTabsNavigator',
 					headerShown: false,
 				}}
 			></Stack.Screen>

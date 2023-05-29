@@ -1,7 +1,18 @@
 import { View, Text, FlatList } from 'react-native';
 import styles from './styles';
-import { INVOICES } from '../../data/Invoices.js';
+// import { INVOICES } from '../../data/Invoices.js';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { InvoiceSelected } from '../../store/actions/invoice.action';
+import { useEffect } from 'react';
+
 const Invoice = () => {
+	const user = useSelector((state) => state.user.selected);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(InvoiceSelected(user.id));
+	}, []);
+	const invoices = useSelector((state) => state.invoices.selected);
 	const renderInvoice = ({ item }) => (
 		<View style={styles.containerTable}>
 			<Text style={styles.textTable}>{item.name}</Text>
@@ -11,7 +22,12 @@ const Invoice = () => {
 	);
 	return (
 		<View style={styles.container}>
-			<FlatList data={INVOICES} renderItem={renderInvoice} keyExtractor={(item) => item.id} style={styles.TableContainer} />
+			<FlatList
+				data={invoices}
+				renderItem={renderInvoice}
+				keyExtractor={(item) => item.id}
+				style={styles.TableContainer}
+			/>
 		</View>
 	);
 };
