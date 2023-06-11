@@ -1,41 +1,15 @@
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import colors from '../constants/colors';
-import Home from '../screens/Home';
-import Login from '../screens/Login';
-import BottomTabsNavigator from './BottomTabsNavigator';
-
-const AppNavigation = () => {
-	const Stack = createNativeStackNavigator();
+import BottomTabNavigator from './BottomTabsNavigator';
+import AuthNavigator from './AuthNavigator';
+import { useSelector } from 'react-redux';
+const index = () => {
+	const userId = useSelector((state) => state.auth.userId);
 	return (
-		<Stack.Navigator
-			initialRouteName="Login"
-			screenOptions={{
-				headerStyle: {
-					backgroundColor: colors.primary,
-				},
-				headerTintColor: colors.darkBlue,
-				headerTitleStyle: {
-					fontWeight: 'bold',
-				},
-			}}
-		>
-			<Stack.Screen
-				name="Login"
-				component={Login}
-				options={{
-					headerShown: false,
-				}}
-			/>
-			<Stack.Screen
-				name="BottomTabsNavigator"
-				component={BottomTabsNavigator}
-				options={{
-					headerShown: false,
-				}}
-			></Stack.Screen>
-		</Stack.Navigator>
+		<NavigationContainer>
+			{userId ? <BottomTabNavigator /> : <AuthNavigator />}
+		</NavigationContainer>
 	);
 };
 
-export default AppNavigation;
+export default index;

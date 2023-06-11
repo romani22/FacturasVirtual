@@ -4,11 +4,21 @@ import colors from '../../constants/colors';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 10,
-		alignItems: 'center',
-		justifyContent: 'center',
 		backgroundColor: colors.tertiary,
-		width: '100%',
+	},
+	imgFondo: {
+		flex: 1,
+		resizeMode: 'cover',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	CardLogin: {
+		backgroundColor: '#e5e4e4',
+		shadowColor: colors.white,
+		shadowOffset: { width: 1, height: 1 },
+		shadowRadius: 6,
+		shadowOpacity: 0.7,
+		elevation: 2,
 	},
 	titleLogin: {
 		fontSize: 25,
@@ -20,13 +30,28 @@ const styles = StyleSheet.create({
 		elevation: 2,
 		textShadowRadius: 15,
 	},
-	buttonLogin: {
+	buttonSingUp: {
 		backgroundColor: colors.gray,
+		margin: 10,
 		marginTop: 30,
 		shadowColor: colors.black,
 		shadowRadius: 10,
 		shadowOffset: { width: 1, height: 2 },
 		elevation: 5,
+	},
+	buttonLogin: {
+		backgroundColor: colors.gray,
+		margin: 10,
+		marginTop: 30,
+		shadowColor: colors.black,
+		shadowRadius: 10,
+		shadowOffset: { width: 1, height: 2 },
+		elevation: 5,
+	},
+	boxButton: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 });
 
