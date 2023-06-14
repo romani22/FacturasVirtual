@@ -61,7 +61,7 @@ const NewRecipe = ({ navigation }) => {
 					/>
 				</View>
 				<Button
-					title={'Guardar direccion'}
+					title={'Guardar Receta'}
 					textStyle={styles.textButton}
 					buttonStyle={styles.button}
 					actionPress={handleSave}
