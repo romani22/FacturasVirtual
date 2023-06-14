@@ -1,12 +1,10 @@
 import * as ImagePicker from 'expo-image-picker';
-import { StyleSheet, Text, View, Alert, Image, Button } from 'react-native';
+import { Text, View, Alert, Image } from 'react-native';
 import React, { useState } from 'react';
-import colors from '../../constants/colors';
-import styles from '../../screens/NewRecipe/styles';
-
+import styles from './styles';
+import Button from '../Button';
 const ImageSelector = (props) => {
-	const [pickedUri, setPickedUri] = useState();
-
+	const [pickedUri, setPickedUri] = useState('');
 	const verifyPermissons = async () => {
 		const { status } = await ImagePicker.requestCameraPermissionsAsync();
 		if (status != 'granted') {
@@ -28,11 +26,9 @@ const ImageSelector = (props) => {
 			aspect: [16, 9],
 			quality: 0.8,
 		});
-		console.log(image);
 		setPickedUri(image.assets[0].uri);
 		props.onImage(image.assets[0].uri);
 	};
-
 	return (
 		<View style={styles.container}>
 			<View style={styles.preview}>
@@ -42,7 +38,12 @@ const ImageSelector = (props) => {
 					<Image style={styles.image} source={{ uri: pickedUri }} />
 				)}
 			</View>
-			<Button title="Tomar Foto" color={colors.blue} onPress={handlerTakeImage} />
+			<Button
+				title={'Tomar Foto'}
+				textStyle={styles.textButton}
+				buttonStyle={styles.button}
+				actionPress={handlerTakeImage}
+			/>
 		</View>
 	);
 };

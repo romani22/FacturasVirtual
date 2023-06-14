@@ -1,14 +1,14 @@
 import { View, Text } from 'react-native';
 import styles from './styles';
 
-const Turn = () => {
+const RecipeDetail = () => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.view}>
-				<Text>Turn</Text>
+				<Text>RecipeDetail</Text>
 			</View>
 		</View>
 	);
 };
 
-export default Turn;
+export default RecipeDetail;

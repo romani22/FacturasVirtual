@@ -4,21 +4,19 @@ import colors from '../../constants/colors';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 35,
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-		width: '100%',
 	},
 	containerTitle: {
+		paddingTop: 35,
+		paddingHorizontal: 15,
 		flexDirection: 'row',
-		justifyContent: 'flex-start',
+		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
 	view: {
+		flex: 1,
 		width: '100%',
 		alignItems: 'center',
 		justifyContent: 'center',
-		flex: 1,
 	},
 	titleRecipe: {
 		fontSize: 24,
@@ -36,6 +34,12 @@ const styles = StyleSheet.create({
 	buttonText: {
 		color: colors.white,
 		fontSize: 20,
+	},
+	image: {
+		width: 70,
+		height: 70,
+		borderRadius: 35,
+		backgroundColor: colors.primary,
 	},
 });
 
