@@ -11,7 +11,7 @@ const RecipesUser = ({ navigation }) => {
 			title={item.title}
 			image={item.image}
 			description={item.description}
-			onSelect={() => navigator.navigate('RecipeDetail', { placeId: item.id })}
+			onSelect={() => navigator.navigate('RecipeDetail', { recipesId: item.id })}
 		/>
 	);
 	const changeviewAdd = () => {

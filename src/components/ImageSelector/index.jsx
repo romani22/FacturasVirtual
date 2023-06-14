@@ -1,10 +1,10 @@
 import * as ImagePicker from 'expo-image-picker';
 import { Text, View, Alert, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles';
 import Button from '../Button';
 const ImageSelector = (props) => {
-	const [pickedUri, setPickedUri] = useState('');
+	const [pickedUri, setPickedUri] = useState();
 	const verifyPermissons = async () => {
 		const { status } = await ImagePicker.requestCameraPermissionsAsync();
 		if (status != 'granted') {
@@ -17,6 +17,11 @@ const ImageSelector = (props) => {
 		}
 		return true;
 	};
+	useEffect(() => {
+		if (props.valor === '') {
+			setPickedUri('');
+		}
+	}, [props.valor]);
 
 	const handlerTakeImage = async () => {
 		const hasPermission = await verifyPermissons();

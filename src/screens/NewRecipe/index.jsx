@@ -2,24 +2,22 @@ import { View, ScrollView, TextInput, Text, Alert } from 'react-native';
 import styles from './styles';
 import ImageSelector from '../../components/ImageSelector';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { addRecipe } from '../../store/actions/recipe.action';
 import Button from '../../components/Button';
 const NewRecipe = ({ navigation }) => {
 	const dispatch = useDispatch();
-	const [title, setTitle] = useState('');
-	const [image, setImage] = useState('');
-	const [description, setDescription] = useState('');
-	const [stepCook, setStepCook] = useState('');
+	const [titleNew, setTitle] = useState('');
+	const [imageNew, setImage] = useState('');
+	const [descriptionNew, setDescription] = useState('');
+	const [stepCookNew, setStepCook] = useState('');
 
 	const handleTitleChange = (text) => setTitle(text);
 	const handleDescriptionChange = (text) => setDescription(text);
 	const handleStepChange = (text) => setStepCook(text);
 
 	const handleSave = () => {
-		if (title === '' || image === '')
-			return Alert.alert('Atención!', 'debe completar todo los campos', [{ text: 'ok' }]);
-		dispatch(addRecipe(title, image, description, stepCook));
+		dispatch(addRecipe(titleNew, imageNew, descriptionNew, stepCookNew));
 		setImage('');
 		setTitle('');
 		setDescription('');
@@ -35,17 +33,17 @@ const NewRecipe = ({ navigation }) => {
 					<TextInput
 						style={styles.input}
 						placeholder="Escriba el nombre de su Receta"
-						value={title}
+						value={titleNew}
 						onChangeText={handleTitleChange}
 					/>
 				</View>
 				<View style={styles.view}>
-					<ImageSelector onImage={setImage} />
+					<ImageSelector onImage={setImage} valor={imageNew} />
 				</View>
 				<View style={styles.view}>
 					<TextInput
 						style={styles.input}
-						value={description}
+						value={descriptionNew}
 						multiline
 						placeholder="Escriba una descripción de la Receta"
 						onChangeText={handleDescriptionChange}
@@ -54,7 +52,7 @@ const NewRecipe = ({ navigation }) => {
 				<View style={styles.view}>
 					<TextInput
 						style={styles.input}
-						value={stepCook}
+						value={stepCookNew}
 						multiline
 						placeholder="Escriba los pasos para realizar la Receta"
 						onChangeText={handleStepChange}
