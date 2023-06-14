@@ -1,5 +1,5 @@
-import { View, Text, ImageBackground } from 'react-native';
-import { useEffect, useState } from 'react';
+import { View, Text, ImageBackground, Alert } from 'react-native';
+import { useCallback, useEffect, useReducer, useState } from 'react';
 import styles from './styles';
 import Card from '../../components/Card';
 import Input from '../../components/Input';
@@ -9,40 +9,85 @@ import Button from '../../components/Button';
 import colors from '../../constants/colors';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { LoginUser } from '../../store/actions/user.action';
+import { signIn, singUp } from '../../store/actions/auth.action';
+
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
+
+const formReducer = (state, action) => {
+	if (action.type === FORM_INPUT_UPDATE) {
+		const updatedValues = {
+			...state.inputValues,
+			[action.input]: action.value,
+		};
+		const updatedValidities = {
+			...state.inputValidities,
+			[action.input]: action.isValid,
+		};
+		let updatedFormIsValid = true;
+		for (const key in updatedValidities) {
+			updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
+		}
+		return {
+			inputValues: updatedValues,
+			inputValidities: updatedValidities,
+			formIsValid: updatedFormIsValid,
+		};
+	}
+	return state;
+};
 
 const Login = ({ navigation }) => {
-	const logeo = useSelector((state) => state.auth.token);
-
-	const dispatch = useDispatch();
-
 	const [loaded] = useFonts({
 		'Sigmar-Regular': require('../../assets/fonts/Sigmar-Regular.ttf'),
 	});
-	const [user, setUser] = useState('');
-	const [password, setPassword] = useState('');
-
-	const handleUser = (user) => {
-		setUser(user);
-	};
-	const handlePassword = (pass) => {
-		setPassword(pass);
-	};
+	const dispatch = useDispatch();
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		dispatch(LoginUser(user, password));
-	}, [user, password]);
+		if (error) {
+			Alert.alert('A ocurrido un error', error, [{ text: 'ok' }]);
+		}
+	}, [error]);
 
-	const handleCheckLogin = () => {
-		if (logeo) {
-			navigation.navigate('BottomTabsNavigator');
-			setUser('');
-			setPassword('');
+	const [formState, dispatchFormState] = useReducer(formReducer, {
+		inputValues: {
+			email: '',
+			password: '',
+		},
+		inputValidities: {
+			email: false,
+			password: false,
+		},
+		formIsValid: false,
+	});
+
+	const onInputChangeHandler = useCallback(
+		(inputIdentifier, inputValue, inputValidity) => {
+			dispatchFormState({
+				type: FORM_INPUT_UPDATE,
+				value: inputValue,
+				isValid: inputValidity,
+				input: inputIdentifier,
+			});
+		},
+		[dispatchFormState]
+	);
+
+	const handleSingUp = () => {
+		if (formState.formIsValid) {
+			dispatch(singUp(formState.inputValues.email, formState.inputValues.password));
 		} else {
-			null;
+			Alert.alert('Formulario invalido', 'Ingrese email y password validos', [{ text: 'OK' }]);
 		}
 	};
-
+	const handleSingIn = () => {
+		console.log(formState.formIsValid);
+		if (formState.formIsValid) {
+			dispatch(signIn(formState.inputValues.email, formState.inputValues.password));
+		} else {
+			Alert.alert('Formulario invalido', 'Ingrese email y password validos', [{ text: 'OK' }]);
+		}
+	};
 	if (!loaded) {
 		return null;
 	}
@@ -56,36 +101,41 @@ const Login = ({ navigation }) => {
 					{/* <Logo /> */}
 					<Text style={styles.titleLogin}>INICIAR SESIÓN</Text>
 					<Input
-						blurOnSubmit
-						autoCapitalize="none"
-						autoCorrect={false}
+						id="email"
+						label="Email"
 						keyboardType="email-address"
-						placeholder="Escribe tu email"
-						value={user}
-						onChangeText={handleUser}
-					/>
-					<Input
-						blurOnSubmit
-						autoCapitalize="none"
 						autoCorrect={false}
+						required
+						autoCapitalize="none"
+						errorText={'Por Favor ingrese un email valido'}
+						initialValue=""
+						onInputChange={onInputChangeHandler}
+					/>
+
+					<Input
+						id="password"
+						label="Password"
 						keyboardType="default"
-						placeholder="Escribe tu contraseña"
-						otherStyles={{ marginTop: 20 }}
-						value={password}
-						onChangeText={handlePassword}
+						required
+						password
+						secureTextEntry
+						autoCapitalize="none"
+						errorText="Por favor ingrese una contrasena valida"
+						onInputChange={onInputChangeHandler}
+						initialValue=""
 					/>
 					<View style={styles.boxButton}>
 						<Button
 							title={'Registrarse'}
 							buttonStyle={styles.buttonSingUp}
 							textStyle={{ color: colors.white }}
-							actionPress={() => handleCheckLogin()}
+							actionPress={() => handleSingUp()}
 						/>
 						<Button
 							title={'Ingresar'}
 							buttonStyle={styles.buttonLogin}
 							textStyle={{ color: colors.white }}
-							actionPress={() => handleCheckLogin()}
+							actionPress={() => handleSingIn()}
 						/>
 					</View>
 				</Card>

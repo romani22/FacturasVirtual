@@ -1,38 +1,32 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View } from 'react-native';
-import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import styles from './styles';
-import Menu from '../../screens/Menu';
+import RecipesUser from '../../screens/RecipesUser';
 import Home from '../../screens/Home';
 import Invoice from '../../screens/Invoice';
-import Notification from '../../screens/Notification';
-import Turn from '../../screens/Turn';
+import NewRecipe from '../../screens/NewRecipe';
 import colors from '../../constants/colors';
 const BottomTabs = createBottomTabNavigator();
 
 export default BottomTabsNavigator = () => {
 	return (
-		<BottomTabs.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, tabBarShowLabel: false, tabBarStyle: styles.tabBar }}>
+		<BottomTabs.Navigator
+			initialRouteName="Home"
+			screenOptions={{ headerShown: false, tabBarShowLabel: false, tabBarStyle: styles.tabBar }}
+		>
 			<BottomTabs.Screen
-				name="Menu"
-				component={Menu}
+				name="Lista"
+				component={RecipesUser}
 				options={{
 					tabBarIcon: () => (
 						<View style={styles.Button}>
-							<FontAwesome5 name="list" size={24} style={styles.shadowIcon} color={colors.white} />
-							{/* <Text style={styles.textButton}>Menu</Text> */}
-						</View>
-					),
-				}}
-			/>
-			<BottomTabs.Screen
-				name="Notification"
-				component={Notification}
-				options={{
-					tabBarIcon: () => (
-						<View style={styles.Button}>
-							<FontAwesome5 name="bell" size={24} style={styles.shadowIcon} color={colors.white} />
-							{/* <Text style={styles.textButton}>Notification</Text> */}
+							<FontAwesome5
+								name="list"
+								size={24}
+								style={styles.shadowIcon}
+								color={colors.white}
+							/>
 						</View>
 					),
 				}}
@@ -43,35 +37,36 @@ export default BottomTabsNavigator = () => {
 				options={{
 					tabBarIcon: () => (
 						<View style={styles.Button}>
-							<MaterialCommunityIcons name="home-outline" size={27} style={styles.shadowIcon} color={colors.white} />
-							{/* <Text style={styles.textButton}>Home</Text> */}
+							<MaterialCommunityIcons
+								name="home-outline"
+								size={27}
+								style={styles.shadowIcon}
+								color={colors.white}
+							/>
 						</View>
 					),
 				}}
 			/>
 			<BottomTabs.Screen
-				name="Invoice"
+				name="Search"
 				component={Invoice}
 				options={{
 					tabBarIcon: () => (
 						<View style={styles.Button}>
-							<FontAwesome5 name="file-alt" size={24} style={styles.shadowIcon} color={colors.white} />
-							{/* <Text style={styles.textButton}>Invoice</Text> */}
+							<FontAwesome
+								name="gears"
+								size={24}
+								style={styles.shadowIcon}
+								color={colors.white}
+							/>
 						</View>
 					),
 				}}
 			/>
 			<BottomTabs.Screen
-				name="Turn"
-				component={Turn}
-				options={{
-					tabBarIcon: () => (
-						<View style={styles.Button}>
-							<FontAwesome5 name="calendar-alt" size={24} style={styles.shadowIcon} color={colors.white} />
-							{/* <Text style={styles.textButton}>Turn</Text> */}
-						</View>
-					),
-				}}
+				name="newRecipe"
+				component={NewRecipe}
+				options={{ title: 'nueva receta', tabBarButton: () => null }}
 			/>
 		</BottomTabs.Navigator>
 	);

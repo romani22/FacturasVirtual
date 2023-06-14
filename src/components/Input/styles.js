@@ -2,19 +2,30 @@ import { StyleSheet } from 'react-native';
 import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
+	formControl: {
+		width: '100%',
+	},
+	label: {
+		marginVertical: 8,
+	},
 	input: {
 		height: 35,
-		borderColor: colors.black,
+		borderColor: colors.gray,
 		borderWidth: 1,
 		borderRadius: 10,
 		width: '100%',
 		padding: 5,
 		backgroundColor: colors.white,
-		shadowColor: colors.black,
-		shadowOffset: { width: 3, height: 3 },
-		shadowRadius: 10,
-		shadowOpacity: 0.8,
 		elevation: 7,
+		paddingHorizontal: 2,
+		paddingVertical: 5,
+	},
+	errorContainer: {
+		marginTop: 6,
+		marginBottom: 6,
+	},
+	errorText: {
+		color: 'red',
 	},
 });
 

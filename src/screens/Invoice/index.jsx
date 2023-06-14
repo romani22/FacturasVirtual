@@ -7,7 +7,7 @@ import { InvoiceSelected } from '../../store/actions/invoice.action';
 import { useEffect } from 'react';
 
 const Invoice = () => {
-	const user = useSelector((state) => state.user.selected);
+	const user = useSelector((state) => state.auth.register);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(InvoiceSelected(user.id));

@@ -3,21 +3,20 @@ import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		paddingTop: 35,
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-		width: '100%',
+		marginBottom: 10,
 	},
-	view: {
+	preview: {
 		width: '100%',
-		alignItems: 'center',
+		height: 200,
+		marginBottom: 10,
 		justifyContent: 'center',
-		flex: 1,
+		alignItems: 'center',
+		borderColor: colors.darkBlue,
+		borderWidth: 1,
 	},
-	footer: {
-		position: 'absolute',
-		bottom: 0,
+	image: {
+		width: '100%',
+		height: '100%',
 	},
 });
 
