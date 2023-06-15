@@ -1,6 +1,7 @@
 import * as FileSystem from 'expo-file-system';
 
 export const ADD_RECIPE = 'ADD_RECIPE';
+export const SELECT_RECIPED = 'SELECT_RECIPED';
 
 export const addRecipe = (title, image, description, steps) => {
 	return async (dispatch) => {
@@ -19,3 +20,7 @@ export const addRecipe = (title, image, description, steps) => {
 		dispatch({ type: ADD_RECIPE, payload: { title, image: Path, description, steps } });
 	};
 };
+export const selectRecipe = (id) => ({
+	type: 'SELECT_RECIPED',
+	payload: id,
+});

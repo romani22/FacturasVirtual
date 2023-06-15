@@ -1,19 +1,27 @@
 import { View, Text, FlatList, Image } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import RecipeItem from '../../components/RecipeItem';
+import { selectRecipe } from '../../store/actions/recipe.action';
 
 const RecipesUser = ({ navigation }) => {
 	const recipes = useSelector((state) => state.recipe.recipe);
+	const dispatch = useDispatch();
 	const renderItem = ({ item }) => (
 		<RecipeItem
 			title={item.title}
 			image={item.image}
 			description={item.description}
-			onSelect={() => navigator.navigate('RecipeDetail', { recipesId: item.id })}
+			onSelect={() => {
+				changeViewDetail(item.id);
+			}}
 		/>
 	);
+	const changeViewDetail = (id) => {
+		dispatch(selectRecipe(id));
+		navigation.navigate('RecipeDetail');
+	};
 	const changeviewAdd = () => {
 		navigation.navigate('newRecipe');
 	};

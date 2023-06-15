@@ -1,8 +1,9 @@
-import { ADD_RECIPE } from '../actions/recipe.action';
+import { ADD_RECIPE, SELECT_RECIPED } from '../actions/recipe.action';
 import Recipe from '../../models/Recipe';
 
 const initialState = {
 	recipe: [],
+	selected: 'hola',
 };
 
 const RecipeReducers = (state = initialState, action) => {
@@ -16,6 +17,9 @@ const RecipeReducers = (state = initialState, action) => {
 				action.payload.steps
 			);
 			return { ...state, recipe: state.recipe.concat(newRecipe) };
+		case SELECT_RECIPED:
+			console.log(action.payload);
+			return { ...state, selected: action.payload };
 		default:
 			return state;
 	}
