@@ -20,11 +20,10 @@ export const init = () => {
 
 export const insertRecipe = (title, image, description, steps) => {
 	const promise = new Promise((resolve, reject) => {
-		const imageFileName = image.split('/').pop();
 		db.transaction((tx) => {
 			tx.executeSql(
-				'INSERT INTO recipes (title, image, description, step) VALUES (?,?,?,?);',
-				[title, imageFileName || '', description, steps],
+				'INSERT INTO recipes (title, image, description, steps) VALUES (?,?,?,?);',
+				[title, image || '', description, steps],
 				(_, result) => resolve(result),
 				(_, err) => reject(err)
 			);

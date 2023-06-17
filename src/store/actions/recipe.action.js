@@ -14,7 +14,7 @@ export const addRecipe = (title, image, description, steps) => {
 				from: image,
 				to: Path,
 			});
-			const result = await insertRecipe(title, image, description, steps);
+			const result = await insertRecipe(title, Path, description, steps);
 			dispatch({ type: ADD_RECIPE, payload: { title, image: Path, description, steps } });
 		} catch (error) {
 			throw error;

@@ -17,6 +17,7 @@ const RecipesUser = ({ navigation }) => {
 	const renderItem = ({ item }) => {
 		return (
 			<RecipeItem
+				id={item.id}
 				title={item.title}
 				image={item.image}
 				description={item.description}
