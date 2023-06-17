@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: colors.tertiary,
 	},
+	containerCard: {
+		maxHeight: 400,
+		minHeight: 300,
+	},
 	imgFondo: {
 		flex: 1,
 		resizeMode: 'cover',

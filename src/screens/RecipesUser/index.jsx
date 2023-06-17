@@ -9,12 +9,12 @@ import { useEffect } from 'react';
 const RecipesUser = ({ navigation }) => {
 	const dispatch = useDispatch();
 	const recipes = useSelector((state) => state.recipe.recipe);
+
 	useEffect(() => {
 		dispatch(loadRecipe());
 	}, []);
 
 	const renderItem = ({ item }) => {
-		console.log(item);
 		return (
 			<RecipeItem
 				title={item.title}
@@ -26,6 +26,7 @@ const RecipesUser = ({ navigation }) => {
 			/>
 		);
 	};
+
 	const changeViewDetail = (id) => {
 		dispatch(selectRecipe(id));
 		navigation.navigate('RecipeDetail');
@@ -44,7 +45,6 @@ const RecipesUser = ({ navigation }) => {
 					actionPress={() => changeviewAdd()}
 				/>
 			</View>
-
 			<FlatList data={recipes} keyExtractor={(item) => item.id} renderItem={renderItem} />
 		</View>
 	);

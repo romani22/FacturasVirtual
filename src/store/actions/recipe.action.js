@@ -1,5 +1,5 @@
 import * as FileSystem from 'expo-file-system';
-import { insertRecipe, fetchRecipe } from '../../../db';
+import { insertRecipe, fetchRecipe, selectXidRecipe } from '../../../db';
 
 export const ADD_RECIPE = 'ADD_RECIPE';
 export const SELECT_RECIPED = 'SELECT_RECIPED';
@@ -21,10 +21,16 @@ export const addRecipe = (title, image, description, steps) => {
 		}
 	};
 };
-export const selectRecipe = (id) => ({
-	type: 'SELECT_RECIPED',
-	payload: id,
-});
+export const selectRecipe = (id) => {
+	return async (dispatch) => {
+		try {
+			const result = await selectXidRecipe(id);
+			dispatch({ type: SELECT_RECIPED, payload: result.rows._array });
+		} catch (error) {
+			throw error;
+		}
+	};
+};
 
 export const loadRecipe = () => {
 	return async (dispatch) => {

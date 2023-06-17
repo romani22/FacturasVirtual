@@ -4,10 +4,10 @@ import colors from '../../constants/colors';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 35,
 		alignItems: 'center',
-		justifyContent: 'flex-end',
+		justifyContent: 'center',
 		width: '100%',
+		paddingVertical: 50,
 	},
 	view: {
 		width: '100%',
@@ -15,9 +15,10 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		flex: 1,
 	},
-	footer: {
-		position: 'absolute',
-		bottom: 0,
+	image: {
+		width: '100%',
+		height: 100,
+		backgroundColor: colors.primary,
 	},
 });
 

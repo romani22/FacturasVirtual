@@ -6,7 +6,7 @@ export const init = () => {
 	const promise = new Promise((resolve, reject) => {
 		db.transaction((tx) => {
 			tx.executeSql(
-				'CREATE TABLE IF NOT EXISTS recipes (id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, image TEXT NOT NULL, description TEXT NOT NULL, step TEXT NOT NULL)',
+				'CREATE TABLE IF NOT EXISTS recipes (id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, image TEXT NOT NULL, description TEXT NOT NULL, steps TEXT NOT NULL)',
 				[],
 				() => {
 					resolve();
@@ -18,12 +18,13 @@ export const init = () => {
 	return promise;
 };
 
-export const insertRecipe = (title, image, description, step) => {
+export const insertRecipe = (title, image, description, steps) => {
 	const promise = new Promise((resolve, reject) => {
+		const imageFileName = image.split('/').pop();
 		db.transaction((tx) => {
 			tx.executeSql(
 				'INSERT INTO recipes (title, image, description, step) VALUES (?,?,?,?);',
-				[title, image, description, step],
+				[title, imageFileName || '', description, steps],
 				(_, result) => resolve(result),
 				(_, err) => reject(err)
 			);
@@ -44,4 +45,22 @@ export const fetchRecipe = () => {
 		});
 	});
 	return promise;
+};
+
+export const selectXidRecipe = (id) => {
+	if (id !== null) {
+		const promise = new Promise((resolve, reject) => {
+			db.transaction((tx) => {
+				tx.executeSql(
+					'SELECT * FROM recipes WHERE id = ?;',
+					[id],
+					(_, result) => resolve(result),
+					(_, err) => reject(err)
+				);
+			});
+		});
+		return promise;
+	} else {
+		resolve(null);
+	}
 };

@@ -3,7 +3,7 @@ import Recipe from '../../models/Recipe';
 
 const initialState = {
 	recipe: [],
-	selected: '',
+	select: [],
 };
 
 const RecipeReducers = (state = initialState, action) => {
@@ -18,7 +18,10 @@ const RecipeReducers = (state = initialState, action) => {
 			);
 			return { ...state, recipe: state.recipe.concat(newRecipe) };
 		case SELECT_RECIPED:
-			return { ...state, selected: action.payload };
+			return {
+				...state,
+				select: action.payload,
+			};
 		case LOAD_RECIPED:
 			return {
 				...state,

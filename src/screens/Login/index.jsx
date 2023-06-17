@@ -96,49 +96,51 @@ const Login = ({ navigation }) => {
 				source={require('../../assets/img/comidaFondoNegro.jpg')}
 				style={styles.imgFondo}
 			>
-				<Card customeStyle={styles.CardLogin}>
-					{/* <Logo /> */}
-					<Text style={styles.titleLogin}>INICIAR SESIÓN</Text>
-					<Input
-						id="email"
-						label="Email"
-						keyboardType="email-address"
-						autoCorrect={false}
-						email
-						required
-						autoCapitalize="none"
-						errorText={'Por Favor ingrese un email valido'}
-						initialValue=""
-						onInputChange={onInputChangeHandler}
-					/>
+				<View style={styles.containerCard}>
+					<Card customeStyle={styles.CardLogin}>
+						{/* <Logo /> */}
+						<Text style={styles.titleLogin}>INICIAR SESIÓN</Text>
+						<Input
+							id="email"
+							label="Email"
+							keyboardType="email-address"
+							autoCorrect={false}
+							email
+							required
+							autoCapitalize="none"
+							errorText={'Por Favor ingrese un email valido'}
+							initialValue=""
+							onInputChange={onInputChangeHandler}
+						/>
 
-					<Input
-						id="password"
-						label="Password"
-						keyboardType="default"
-						required
-						password
-						secureTextEntry
-						autoCapitalize="none"
-						errorText="Por favor ingrese una contrasena valida"
-						onInputChange={onInputChangeHandler}
-						initialValue=""
-					/>
-					<View style={styles.boxButton}>
-						<Button
-							title={'Registrarse'}
-							buttonStyle={styles.buttonSingUp}
-							textStyle={{ color: colors.white }}
-							actionPress={() => handleSingUp()}
+						<Input
+							id="password"
+							label="Password"
+							keyboardType="default"
+							required
+							password
+							secureTextEntry
+							autoCapitalize="none"
+							errorText="Por favor ingrese una contrasena valida"
+							onInputChange={onInputChangeHandler}
+							initialValue=""
 						/>
-						<Button
-							title={'Ingresar'}
-							buttonStyle={styles.buttonLogin}
-							textStyle={{ color: colors.white }}
-							actionPress={() => handleSingIn()}
-						/>
-					</View>
-				</Card>
+						<View style={styles.boxButton}>
+							<Button
+								title={'Registrarse'}
+								buttonStyle={styles.buttonSingUp}
+								textStyle={{ color: colors.white }}
+								actionPress={() => handleSingUp()}
+							/>
+							<Button
+								title={'Ingresar'}
+								buttonStyle={styles.buttonLogin}
+								textStyle={{ color: colors.white }}
+								actionPress={() => handleSingIn()}
+							/>
+						</View>
+					</Card>
+				</View>
 			</ImageBackground>
 		</View>
 	);
