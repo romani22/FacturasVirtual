@@ -3,21 +3,29 @@ import styles from './styles';
 import Button from '../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import RecipeItem from '../../components/RecipeItem';
-import { selectRecipe } from '../../store/actions/recipe.action';
+import { loadRecipe, selectRecipe } from '../../store/actions/recipe.action';
+import { useEffect } from 'react';
 
 const RecipesUser = ({ navigation }) => {
-	const recipes = useSelector((state) => state.recipe.recipe);
 	const dispatch = useDispatch();
-	const renderItem = ({ item }) => (
-		<RecipeItem
-			title={item.title}
-			image={item.image}
-			description={item.description}
-			onSelect={() => {
-				changeViewDetail(item.id);
-			}}
-		/>
-	);
+	const recipes = useSelector((state) => state.recipe.recipe);
+	useEffect(() => {
+		dispatch(loadRecipe());
+	}, []);
+
+	const renderItem = ({ item }) => {
+		console.log(item);
+		return (
+			<RecipeItem
+				title={item.title}
+				image={item.image}
+				description={item.description}
+				onSelect={() => {
+					changeViewDetail(item.id);
+				}}
+			/>
+		);
+	};
 	const changeViewDetail = (id) => {
 		dispatch(selectRecipe(id));
 		navigation.navigate('RecipeDetail');

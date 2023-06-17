@@ -81,7 +81,6 @@ const Login = ({ navigation }) => {
 		}
 	};
 	const handleSingIn = () => {
-		console.log(formState.formIsValid);
 		if (formState.formIsValid) {
 			dispatch(signIn(formState.inputValues.email, formState.inputValues.password));
 		} else {
@@ -105,6 +104,7 @@ const Login = ({ navigation }) => {
 						label="Email"
 						keyboardType="email-address"
 						autoCorrect={false}
+						email
 						required
 						autoCapitalize="none"
 						errorText={'Por Favor ingrese un email valido'}

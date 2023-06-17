@@ -19,6 +19,12 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		bottom: 0,
 	},
+	image: {
+		width: 70,
+		height: 70,
+		borderRadius: 35,
+		backgroundColor: colors.primary,
+	},
 });
 
 export default styles;

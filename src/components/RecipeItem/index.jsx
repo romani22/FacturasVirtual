@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './styles';
 
 const RecipeItem = ({ title, image, description, onSelect }) => {
+	console.log(image);
 	return (
 		<TouchableOpacity style={styles.placeItem} onPress={onSelect}>
 			<Image style={styles.image} source={{ uri: image }} />

@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import { URL_AUTH_SINGUP } from '../../constants/dataBase';
 import { URL_AUTH_SINGIN } from '../../constants/dataBase';
 
@@ -45,7 +46,10 @@ export const signIn = (email, password) => {
 				}),
 			});
 			const data = await response.json();
-			if (data.error) return;
+			if (data.error) {
+				Alert.alert('Atención!', 'El email y/o la contraseña no es correcta', [{ text: 'OK' }]);
+				return;
+			}
 			dispatch({
 				type: SINGIN,
 				token: data.idToken,
