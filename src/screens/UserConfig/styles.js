@@ -4,17 +4,10 @@ import colors from '../../constants/colors';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		width: '95%',
-		maxWidth: '100%',
-		padding: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
-		shadowColor: colors.black,
-		shadowRadius: 5,
-		shadowOpacity: 0.7,
-		elevation: 7,
-		borderRadius: 10,
-		backgroundColor: colors.white,
+		width: '100%',
+		paddingVertical: 50,
 	},
 });
 

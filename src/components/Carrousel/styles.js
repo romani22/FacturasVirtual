@@ -4,19 +4,23 @@ import colors from '../../constants/colors';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 40,
 	},
-	containerTable: {
+	carouselContainer: {
+		flex: 1,
 		flexDirection: 'row',
 	},
-	TableContainer: {
+	boxImg: {
 		flex: 1,
+		width: '100%',
+		height: 150,
+		shadowColor: colors.danger,
+		shadowOffset: { width: 1, height: 1 },
+		shadowOpacity: 0.8,
+		shadowRadius: 6,
+		elevation: 5,
 	},
-	textTable: {
-		color: colors.black,
-		fontSize: 20,
-		textAlign: 'center',
-		width: '33%',
+	image: {
+		flex: 1,
 	},
 });
 

@@ -3,10 +3,8 @@ import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		width: '95%',
-		maxWidth: '100%',
-		padding: 20,
+		marginHorizontal: 5,
+		padding: 10,
 		alignItems: 'center',
 		justifyContent: 'center',
 		shadowColor: colors.black,
@@ -15,6 +13,12 @@ const styles = StyleSheet.create({
 		elevation: 7,
 		borderRadius: 10,
 		backgroundColor: colors.white,
+	},
+	categoryIcon: {
+		width: '100%',
+		height: 100,
+		backgroundColor: colors.darkBlue,
+		borderRadius: 10,
 	},
 });
 

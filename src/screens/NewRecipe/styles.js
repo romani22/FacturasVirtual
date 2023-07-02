@@ -12,17 +12,17 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	container: {
-		paddingTop: 45,
+		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '100%',
-		padding: 15,
+		paddingHorizontal: 15,
+		paddingTop: 55,
 	},
 	view: {
 		width: '100%',
 		alignItems: 'center',
 		justifyContent: 'center',
-		flex: 1,
 	},
 	footer: {
 		position: 'absolute',
@@ -44,9 +44,19 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderBottomColor: colors.gray,
 		borderBottomWidth: 3,
+		marginBottom: 10,
 	},
-	textButton: {
+	Buttontext: {
 		color: colors.white,
+	},
+	viewListIngredient: { flexDirection: 'row' },
+	ViewIngredients: { flexDirection: 'row' },
+	boxIngredients: { flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' },
+	quantityIngredients: { fontSize: 16 },
+	nameIngredients: {
+		fontSize: 16,
+		fontWeight: '800',
+		marginRight: 4,
 	},
 });
 

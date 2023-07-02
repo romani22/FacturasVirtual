@@ -4,16 +4,18 @@ import Button from '../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import RecipeItem from '../../components/RecipeItem';
 import { loadRecipe, selectRecipe } from '../../store/actions/recipe.action';
-import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { selectIngredientXRecipe } from '../../store/actions/ingredients.action';
 
 const RecipesUser = ({ navigation }) => {
 	const dispatch = useDispatch();
 	const recipes = useSelector((state) => state.recipe.recipe);
-
-	useEffect(() => {
-		dispatch(loadRecipe());
-	}, []);
-
+	useFocusEffect(
+		useCallback(() => {
+			dispatch(loadRecipe('user'));
+		}, [dispatch])
+	);
 	const renderItem = ({ item }) => {
 		return (
 			<RecipeItem
@@ -27,9 +29,9 @@ const RecipesUser = ({ navigation }) => {
 			/>
 		);
 	};
-
-	const changeViewDetail = (id) => {
-		dispatch(selectRecipe(id));
+	const changeViewDetail = async (id) => {
+		await dispatch(selectRecipe(id, 'user'));
+		await dispatch(selectIngredientXRecipe(id));
 		navigation.navigate('RecipeDetail');
 	};
 	const changeviewAdd = () => {

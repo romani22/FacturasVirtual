@@ -1,14 +1,16 @@
 import React from 'react';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import styles from './styles';
 
 const BackgroundImage = ({ children }) => (
-	<ImageBackground
-		source={require('../../assets/img/comidaFondoNegro.jpg')}
-		style={styles.background}
-	>
-		{children}
-	</ImageBackground>
+	<View style={styles.view}>
+		<ImageBackground
+			source={require('../../assets/img/comidaFondoNegro.jpg')}
+			style={styles.background}
+		>
+			{children}
+		</ImageBackground>
+	</View>
 );
 
 export default BackgroundImage;
