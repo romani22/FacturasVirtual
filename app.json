@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "FacturasVirtual",
+    "name": "Rincon Culinario",
     "slug": "rincon-culinario",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -25,7 +25,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.shamanking22.rinconculinario"
     },
     "web": {
       "favicon": "./assets/favicon.png"
