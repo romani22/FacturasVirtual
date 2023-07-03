@@ -1,10 +1,14 @@
 {
   "expo": {
     "name": "FacturasVirtual",
-    "slug": "FacturasVirtual",
+    "slug": "rincon-culinario",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -25,6 +29,18 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6b619423-ff2b-40c0-af5a-c6768c99d0ff"
+      }
+    },
+    "owner": "shamanking22",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/6b619423-ff2b-40c0-af5a-c6768c99d0ff"
     }
   }
 }
