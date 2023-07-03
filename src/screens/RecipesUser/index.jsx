@@ -1,13 +1,17 @@
-import { View, Text, FlatList, Image } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import RecipeItem from '../../components/RecipeItem';
-import { loadRecipe, selectRecipe } from '../../store/actions/recipe.action';
+import { deleteRecipeUser, loadRecipe, selectRecipe } from '../../store/actions/recipe.action';
 import { useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { selectIngredientXRecipe } from '../../store/actions/ingredients.action';
+import {
+	deleteIngredientsXRecipe,
+	selectIngredientXRecipe,
+} from '../../store/actions/ingredients.action';
 
+import { Entypo } from '@expo/vector-icons';
 const RecipesUser = ({ navigation }) => {
 	const dispatch = useDispatch();
 	const recipes = useSelector((state) => state.recipe.recipe);
@@ -18,21 +22,38 @@ const RecipesUser = ({ navigation }) => {
 	);
 	const renderItem = ({ item }) => {
 		return (
-			<RecipeItem
-				id={item.id}
-				title={item.title}
-				image={item.image}
-				description={item.description}
-				onSelect={() => {
-					changeViewDetail(item.id);
-				}}
-			/>
+			<View style={styles.viewRecipeItem} key={item.id}>
+				<RecipeItem
+					styleCustom={styles.recipeBox}
+					id={item.id}
+					title={item.title}
+					image={item.image}
+					description={item.description}
+					onSelect={() => {
+						changeViewDetail(item.id);
+					}}
+				/>
+				<TouchableOpacity
+					style={styles.buttonX}
+					onPress={() => {
+						recipeUserDelete(item.id);
+					}}
+				>
+					<Entypo name="cross" size={15} style={styles.shadowIcon} color={colors.black} />
+				</TouchableOpacity>
+			</View>
 		);
+	};
+	const recipeUserDelete = async (id) => {
+		await dispatch(deleteRecipeUser(id));
+		await dispatch(deleteIngredientsXRecipe(id));
+		Alert.alert('Se Elimino correctamente');
+		await dispatch(loadRecipe('user'));
 	};
 	const changeViewDetail = async (id) => {
 		await dispatch(selectRecipe(id, 'user'));
 		await dispatch(selectIngredientXRecipe(id));
-		navigation.navigate('RecipeDetail');
+		await navigation.navigate('RecipeDetail');
 	};
 	const changeviewAdd = () => {
 		navigation.navigate('newRecipe');
@@ -41,6 +62,7 @@ const RecipesUser = ({ navigation }) => {
 		<View style={styles.container}>
 			<View style={styles.containerTitle}>
 				<Text style={styles.titleRecipe}>Listado Creadas</Text>
+
 				<Button
 					title={'+'}
 					buttonStyle={styles.buttonContainer}
