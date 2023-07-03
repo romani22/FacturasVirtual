@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
-	container: { padding: 10 },
+	container: { marginVertical: 10 },
 	Card: {
 		backgroundColor: colors.tertiary,
 		borderRadius: 15,

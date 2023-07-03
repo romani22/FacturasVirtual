@@ -3,6 +3,8 @@ import {
 	ADD_INGREDIENT,
 	LOAD_INGREDIENT_USER,
 	SELECT_INGREDIENT,
+	DELETE_INGREDIENTS_RECIPE_USER,
+	SELECT_ALL_INGREDIENT,
 } from '../actions/ingredients.action';
 
 const initialState = {
@@ -28,11 +30,17 @@ const IngredientsReducers = (state = initialState, action) => {
 				...state,
 				IngredientsUser: action.payload,
 			};
-		case ADD_INGREDIENT:
+		case SELECT_ALL_INGREDIENT:
 			return {
 				...state,
 				IngredientsUser: action.payload,
 			};
+		case ADD_INGREDIENT:
+			return {
+				...state,
+			};
+		case DELETE_INGREDIENTS_RECIPE_USER:
+			return { ...state };
 		default:
 			return state;
 	}

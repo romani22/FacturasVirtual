@@ -41,6 +41,14 @@ const styles = StyleSheet.create({
 		borderRadius: 35,
 		backgroundColor: colors.primary,
 	},
+	viewRecipeItem: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	buttonX: {
+		width: '10%',
+	},
 });
 
 export default styles;

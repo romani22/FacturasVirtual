@@ -6,6 +6,7 @@ import {
 	addShoppingRecipe,
 	fetchRecipeShopping,
 	deleteRecipeShopping,
+	deleteRecipeXid,
 } from '../../../db';
 import { recetas } from '../../data/recipes';
 export const ADD_RECIPE = 'ADD_RECIPE';
@@ -14,19 +15,27 @@ export const LOAD_RECIPED = 'LOAD_RECIPED';
 export const ADD_SHOPPING_RECIPE = 'ADD_SHOPPING_RECIPE';
 export const LOAD_RECIPEDSHOPPING = 'LOAD_RECIPEDSHOPPING';
 export const DELETE_SHOPING = 'DELETE_SHOPING';
+export const DELETE_RECIPE_USER = 'DELETE_RECIPE_USER';
+
 import { ingredients } from '../../data/ingredients';
 import { selectIngredientXRecipe } from './ingredients.action';
 export const addRecipe = (title, type, image, description, steps) => {
 	return async (dispatch) => {
-		const fileName = image.split('/').pop();
-		const Path = FileSystem.documentDirectory + fileName;
+		let Path = '';
+		if (image != '') {
+			const fileName = image.split('/').pop();
+			Path = FileSystem.documentDirectory + fileName;
+		}
+
 		try {
-			await FileSystem.moveAsync({
-				from: image,
-				to: Path,
-			});
+			if (Path) {
+				await FileSystem.moveAsync({
+					from: image,
+					to: Path,
+				});
+			}
+
 			const result = await insertRecipe(title, type, Path, description, steps);
-			console.log(result);
 			dispatch({ type: ADD_RECIPE, payload: { title, type, image: Path, description, steps } });
 			return result;
 		} catch (error) {
@@ -80,6 +89,17 @@ export const loadRecipe = (view, category) => {
 					break;
 			}
 			dispatch({ type: LOAD_RECIPED, payload: result, category });
+			return result;
+		} catch (error) {
+			throw error;
+		}
+	};
+};
+export const deleteRecipeUser = (idRecipeUSer) => {
+	return async (dispatch) => {
+		try {
+			const result = await deleteRecipeXid(idRecipeUSer);
+			dispatch({ type: DELETE_RECIPE_USER, playload: result.rows._array });
 		} catch (error) {
 			throw error;
 		}
@@ -90,7 +110,7 @@ export const addShopping = (idShopping, type) => {
 	return async (dispatch) => {
 		try {
 			const result = await addShoppingRecipe(idShopping, type);
-			dispatch({ type: ADD_SHOPPING_RECIPE, idShopping: { result } });
+			dispatch({ type: ADD_SHOPPING_RECIPE, playload: { result } });
 		} catch (error) {
 			throw error;
 		}
@@ -108,17 +128,25 @@ export const searchRecipeShopping = () => {
 				return false;
 			}
 			result = recipeShop.rows._array;
-			result.forEach(async (item) => {
-				console.log(item, 'nuevo 2');
+
+			for (const item of result) {
 				switch (item.type) {
 					case 'user':
 						const recipe = await selectXidRecipe(item.idShopping);
-						const ingredientesUser = await selectIngredientXRecipe(item.idShopping);
-						console.log(ingredientesUser);
-						ingredientsid.push(recipe['ingredients']);
+						const UserIngredientes = await dispatch(selectIngredientXRecipe(item.idShopping));
+						UserIngredientes.map((item) => {
+							let dataIngre = ingredients.filter((ingre) => ingre.id === item.id);
+							item.name = dataIngre[0].name;
+						});
+						ingredientsid.push({
+							id: item.id,
+							name: recipe.rows._array[0].title,
+							ingredients: UserIngredientes,
+						});
+
 						break;
 					case 'App':
-						Object.keys(recetas).forEach((element, f) => {
+						await Object.keys(recetas).forEach((element, f) => {
 							for (let i = 0; i < recetas[element].length; i++) {
 								if (recetas[element][i].id == item.idShopping) {
 									ingredientsid.push({
@@ -130,17 +158,20 @@ export const searchRecipeShopping = () => {
 								}
 							}
 						});
+
 						break;
 					default:
 						break;
 				}
-			});
-			ingredientsid.forEach((receta) => {
+			}
+
+			await ingredientsid.forEach((receta) => {
 				receta.ingredients.map((ingredient, index) => {
 					let idIngrediente = ingredient.id - 1;
 					receta.ingredients[index].name = ingredients[idIngrediente].name;
 				});
 			});
+
 			dispatch({ type: LOAD_RECIPEDSHOPPING, payload: ingredientsid });
 		} catch (error) {
 			throw error;

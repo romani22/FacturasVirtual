@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 30,
 		flexDirection: 'row',
 		alignItems: 'center',
+		flex: 1,
 	},
 	image: {
 		width: 70,

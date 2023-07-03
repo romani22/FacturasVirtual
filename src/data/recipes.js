@@ -141,7 +141,7 @@ export const recetas = {
 			ingredients: [
 				{ id: 5, quantity: '1/4 de taza' },
 				{ id: 36, quantity: '2 dientes' },
-				{ id: 31, quantity: 'jugo de 2 limones' },
+				{ id: 112, quantity: 'jugo de 2 limones' },
 				{ id: 6, quantity: 'al gusto' },
 				{ id: 33, quantity: 'al gusto' },
 				{ id: 4, quantity: 'al gusto' },

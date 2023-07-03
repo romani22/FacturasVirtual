@@ -5,6 +5,7 @@ import {
 	LOAD_RECIPEDSHOPPING,
 	ADD_SHOPPING_RECIPE,
 	DELETE_SHOPING,
+	DELETE_RECIPE_USER,
 } from '../actions/recipe.action';
 import Recipe from '../../models/Recipe';
 
@@ -12,6 +13,7 @@ const initialState = {
 	recipe: [],
 	select: [],
 	idShoppin: [],
+	shoppinSelected: [],
 	category: '',
 };
 
@@ -48,11 +50,12 @@ const RecipeReducers = (state = initialState, action) => {
 				),
 				category: action.category,
 			};
-
+		case DELETE_RECIPE_USER:
+			return { ...state };
 		case ADD_SHOPPING_RECIPE:
 			return { ...state, idShoppin: action.payload };
 		case LOAD_RECIPEDSHOPPING:
-			return { ...state, idShoppin: action.payload };
+			return { ...state, shoppinSelected: action.payload };
 		case DELETE_SHOPING:
 			return { ...state };
 		default:

@@ -110,4 +110,5 @@ export const ingredients = [
 	{ id: 109, name: 'salsa barbacoa' },
 	{ id: 110, name: 'panes de hamburguesa' },
 	{ id: 111, name: 'carne de pollo molida' },
+	{ id: 112, name: 'limon' },
 ];

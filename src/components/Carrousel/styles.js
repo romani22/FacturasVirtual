@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 	boxImg: {
 		flex: 1,
 		width: '100%',
-		height: 150,
+		height: 180,
 		shadowColor: colors.danger,
 		shadowOffset: { width: 1, height: 1 },
 		shadowOpacity: 0.8,

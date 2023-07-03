@@ -1,4 +1,4 @@
-import { View, ScrollView, TextInput, Text, Modal } from 'react-native';
+import { View, ScrollView, TextInput, Text, Modal, Alert } from 'react-native';
 import styles from './styles';
 import ImageSelector from '../../components/ImageSelector';
 import { useDispatch } from 'react-redux';
@@ -21,13 +21,20 @@ const NewRecipe = ({ navigation }) => {
 	const handleStepChange = (text) => setStepCook(text);
 
 	const handleSave = async () => {
+		if (!imageNew) {
+			Alert.alert('Debe cargar una imagen');
+			return false;
+		}
 		const result = await dispatch(
 			addRecipe(titleNew, 'user', imageNew, descriptionNew, stepCookNew)
 		);
-		const newRecipeId = 1;
-		listIngredients.forEach(async (item) => {
-			await dispatch(addIngredientsUser(item.id, newRecipeId, item.quantity));
-		});
+		const newRecipeId = result.insertId;
+
+		await Promise.all(
+			listIngredients.map(async (item) => {
+				await dispatch(addIngredientsUser(item.id, newRecipeId, item.quantity));
+			})
+		);
 		setImage('');
 		setTitle('');
 		setDescription('');

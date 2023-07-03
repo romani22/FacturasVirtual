@@ -4,9 +4,7 @@ import colors from '../../constants/colors';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 35,
 		alignItems: 'center',
-		justifyContent: 'flex-end',
 		width: '100%',
 	},
 	view: {
@@ -36,6 +34,18 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.8,
 		shadowRadius: 4,
 		elevation: 6,
+	},
+	boxRecipe: {
+		width: '100%',
+		backgroundColor: colors.danger,
+	},
+	card: {
+		flexDirection: 'row',
+		backgroundColor: colors.blue,
+	},
+	boxTouchable: {
+		width: '50%',
+		backgroundColor: 'green',
 	},
 });
 

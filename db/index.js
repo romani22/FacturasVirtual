@@ -68,6 +68,20 @@ export const selectXidRecipe = (id) => {
 	}
 };
 
+export const deleteRecipeXid = (id) => {
+	const promise = new Promise((resolve, reject) => {
+		db.transaction((tx) => {
+			tx.executeSql(
+				'DELETE FROM recipes WHERE id = ?',
+				[id],
+				(_, result) => resolve(result),
+				(_, err) => reject(err)
+			);
+		});
+	});
+	return promise;
+};
+
 // BASE DE DATOS PARA LAS RECETAS QUE SE CARGAN PARA HACER COMPRAS
 export const init2 = () => {
 	const promise = new Promise((resolve, reject) => {
@@ -171,6 +185,33 @@ export const selectIngredientXidRecipe = (id) => {
 		});
 		return promise;
 	} else {
-		return Promise.resolve(null); // Resolves a promise with a null value.
+		return resolve(null);
 	}
+};
+
+export const deleteIngredients = (id) => {
+	const promise = new Promise((resolve, reject) => {
+		db.transaction((tx) => {
+			tx.executeSql(
+				'DELETE FROM IngredientsRecipes WHERE idRecipe = ?',
+				[id],
+				(_, result) => resolve(result),
+				(_, err) => reject(err)
+			);
+		});
+	});
+	return promise;
+};
+export const selectAllIngredientsDb = () => {
+	const promise = new Promise((resolve, reject) => {
+		db.transaction((tx) => {
+			tx.executeSql(
+				'SELECT * FROM IngredientsRecipes',
+				[],
+				(_, result) => resolve(result),
+				(_, err) => reject(err)
+			);
+		});
+	});
+	return promise;
 };

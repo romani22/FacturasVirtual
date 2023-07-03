@@ -8,7 +8,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import colors from '../../constants/colors';
 import { addShopping } from '../../store/actions/recipe.action';
 import { useFocusEffect } from '@react-navigation/native';
-import { loadIngredients } from '../../store/actions/ingredients.action';
+import { loadIngredients, selectIngredientXRecipe } from '../../store/actions/ingredients.action';
 
 const RecipeDetail = () => {
 	const dispatch = useDispatch();
@@ -17,21 +17,19 @@ const RecipeDetail = () => {
 	useFocusEffect(
 		useCallback(() => {
 			dispatch(loadIngredients());
-		}, [dispatch])
+		}, [Recipe])
 	);
-	const ListingredientsUser = useSelector((state) => state.ingredient.IngredientsUser);
-	if (!Recipe[0].ingredients) {
-		Recipe[0].ingredients = ListingredientsUser;
-	}
-	console.log(Recipe[0].ingredients);
 	const [listIngredients, setListIngredients] = useState([]);
-	const generateListIngredient = () => {
+	const generateListIngredient = async () => {
+		if (!Recipe[0].ingredients) {
+			const ListingredientsUser = await dispatch(selectIngredientXRecipe(Recipe[0].id));
+			Recipe[0].ingredients = ListingredientsUser;
+		}
 		const generatedList = Recipe[0].ingredients.map((element) => {
 			const matchedIngredient = ingredients.find((ingredient) => element.id === ingredient.id);
-
 			if (matchedIngredient) {
 				return (
-					<View style={styles.ViewIngredients} key={matchedIngredient.id}>
+					<View style={styles.ViewIngredients} key={element.id}>
 						<Text style={styles.nameIngredients}>{matchedIngredient.name}:</Text>
 						<Text style={styles.quantityIngredients}>{element.quantity}</Text>
 					</View>

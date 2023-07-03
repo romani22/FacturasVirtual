@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import {
 	MaterialCommunityIcons,
 	MaterialIcons,
@@ -13,10 +13,9 @@ import Home from '../../screens/Home';
 import NewRecipe from '../../screens/NewRecipe';
 import colors from '../../constants/colors';
 import RecipeDetail from '../../screens/RecipeDetail';
-import UserConfig from '../../screens/UserConfig';
 import RecipesApp from '../../screens/RecipesApp';
 import Categories from '../../screens/Categories';
-import Ingredients from '../../screens/Ingredients';
+import ShopView from '../../screens/ShopView';
 const BottomTabs = createBottomTabNavigator();
 
 export default BottomTabsNavigator = () => {
@@ -95,7 +94,7 @@ export default BottomTabsNavigator = () => {
 			/>
 			<BottomTabs.Screen
 				name="Shopping"
-				component={UserConfig}
+				component={ShopView}
 				options={{
 					tabBarIcon: () => (
 						<View style={styles.Button}>
